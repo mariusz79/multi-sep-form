@@ -18,9 +18,17 @@
   --alabaster: hsl(231, 100%, 99%);
   --white: hsl(0, 0%, 100%);
   /*border-radius*/
-  --border-radius-small: 20px;
-  --border-radius-large: 36px;
+  --border-radius-small: 6px;
+  --border-radius-medium: 12px;
+  --border-radius-large: 16px;
   /*padding*/
   --padding-12: 12px;
+  /*fonts*/
+  --font-weight-400: 400;
+  --font-weight-500: 500;
+  --font-weight-700: 700;
+  --font-size-18: 18px;
+  --font-size-32: 32px;
+  font-family: 'Ubuntu';
 }
 

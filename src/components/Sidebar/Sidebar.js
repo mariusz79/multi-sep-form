@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import '../../variables.css'
 import styled from "styled-components";
 import Step from './Step';
@@ -13,33 +12,31 @@ const DesktopSidebar = styled.div`
 	border-radius: var(--border-radius-small);
 `;
 
-const Sidebar = (props) => {
-
-	const [activeStep, setActiveStep] = useState(1);
-
-	const handleStepClick = (num)=> {
-		setActiveStep(num);
-	}
+const Sidebar = ({onStepClick, activeStep}) => {
+	
 
 	const steps = [
-			{ num: 1, description: "Your info" },
-			{ num: 2, description: "Select plan" },
-			{ num: 3, description: "Add-ons" },
-			{ num: 4, description: "Summary" },
-		];
+		{ num: 1, description: "Your info" },
+		{ num: 2, description: "Select plan" },
+		{ num: 3, description: "Add-ons" },
+		{ num: 4, description: "Summary" },
+	];
 
-  return ( <DesktopSidebar>
-				{steps.map(({num, description})=>{ 
-					return (
-						<Step
-							key={description}
-							num={num}
-							description={description}
-							active={num===activeStep}
-							onStepClick={handleStepClick}
-						/>
-					);})}
-			</DesktopSidebar> );
-}
+	return (
+		<DesktopSidebar>
+			{steps.map(({ num, description }) => {
+				return (
+					<Step
+						key={description}
+						num={num}
+						description={description}
+						active={num === activeStep}
+						onStepClick={onStepClick}
+					/>
+				);
+			})}
+		</DesktopSidebar>
+	);
+};
  
 export default Sidebar;
