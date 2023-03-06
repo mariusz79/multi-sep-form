@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { formActions } from "../../store"
 import "../../variables.css";
 import styled from "styled-components";
-import PlanCard from "./PlanCard";
 
 const Container = styled.div`
 	display: flex;
+  align-items: center;
+  justify-content: center;
+	background-color: var(--magnolia);
 `;
 
 const Title = styled.p`
@@ -15,6 +18,8 @@ const Title = styled.p`
 
 const CheckBoxWrapper = styled.div`
 	position: relative;
+	
+	display: flex;
 `;
 const CheckBoxLabel = styled.label`
 	position: absolute;
@@ -44,7 +49,7 @@ const CheckBox = styled.input`
 	width: 42px;
 	height: 26px;
 	&:checked + ${CheckBoxLabel} {
-		background: #4fbe79;
+		/* background: #4fbe79; */
 		&::after {
 			content: "";
 			display: block;
@@ -58,20 +63,22 @@ const CheckBox = styled.input`
 `;
 
 const Switch = ({ handleFormData, formData, showError }) => {
-	const [activePlanCard, setActivePlanCard] = useState(1);
-	const [monthly, setMonthly] = useState(true);
+	const yearly = useSelector((state) => state.yearly);
 
-	const handlePlanClick = (num) => {
-		setActivePlanCard(num);
-	};
+	const dispatch = useDispatch();
 
-	
+	const handleCheckboxClick = () => {
+		dispatch(formActions.toggleYearly())
+	}
+
 	return (
 		<Container>
+		<Title>Monthly</Title>
 			<CheckBoxWrapper>
-				<CheckBox id="checkbox" type="checkbox" />
+				<CheckBox id="checkbox" type="checkbox" checked={yearly} onChange={handleCheckboxClick} />
 				<CheckBoxLabel htmlFor="checkbox" />
 			</CheckBoxWrapper>
+			<Title>Yearly</Title>
 		</Container>
 	);
 };

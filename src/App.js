@@ -3,20 +3,22 @@ import Container from "./components/Container";
 import Sidebar from "./components/Sidebar/Sidebar";
 import MainInfo from "./components/MainInfo/MainInfo";
 import ActionButtons from "./components/ActionButtons";
+import { useDispatch, useSelector } from "react-redux";
+import { formActions } from './store'
 
 function App() {
 
-  const [activeStep, setActiveStep] = useState(1);
   const [formData, setFormData] = useState({name: '', email: '', phone: ''});
   const [showError, setShowError] = useState({name: false, email: false, phone: false});
+	// const [activePlan, setActivePlan] = useState(1);
 
 	const handleGoBackClick = () => {
-		setActiveStep(activeStep - 1);
+		dispatch(formActions.decrement());
 	};
 
 	const handleGoForwardClick = () => {
     if(formData.name !== '' && formData.email !=='' && formData.phone !== '') {
-		setActiveStep(activeStep + 1)}
+		dispatch(formActions.increment())}
     else {
 
            setShowError({
@@ -28,6 +30,10 @@ function App() {
 
     return;
 	};
+
+	const activeStep = useSelector((state) => state.activeStep);
+
+	const dispatch = useDispatch();
 
   const handleFormData = (key, value) => {
     setFormData({
@@ -45,6 +51,7 @@ function App() {
 					handleFormData={handleFormData}
 					formData={formData}
 					showError={showError}
+					// activePlan={activePlan}
 				>
 					<ActionButtons
 						activeStep={activeStep}

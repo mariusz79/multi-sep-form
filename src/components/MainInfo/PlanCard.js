@@ -4,8 +4,11 @@ import styled from "styled-components";
 const Card = styled.div`
 	display: flex;
 	flex-direction: column;
+	border: 1px solid;
 	border-color: ${(props) =>
-		props.activePlanCard ? "var(--magnolia)" : "var(--light-gray)"};
+		props.activePlanCard ? "var(--purplish-blue)" : "var(--light-gray)"};
+	background-color: ${(props) =>
+		props.activePlanCard ? "var(--magnolia)" : "var(--white)"};
 	border-radius: var(--border-radius-small);
 	padding: var(--border-radius-medium);
 	&:hover {
@@ -13,7 +16,7 @@ const Card = styled.div`
 	}
 `;
 
-const Icon = styled.img`
+const Image = styled.img`
 	width: 45px;
   height: 45px;
 `;
@@ -32,11 +35,14 @@ const ExtraInfo = styled.p`
 	color: var(--cool-gray);
 `;
 
-const PlanCard = ({ title, price, activePlanCard, icon, monthly }) => {
+const PlanCard = ({ title, price, Image, choice, monthly, activePlan, handleSelectPlan  }) => {
+console.log(choice)
+	
 	
 	return (
-		<Card activePlanCard={activePlanCard}>
-      <Icon src={icon}/>
+		<Card activePlanCard={activePlan} onClick={()=>{handleSelectPlan(choice)}}>
+		<p>{choice}</p>
+      <Image />
 			<Title>{title}</Title>
 			<Price>{`$${price}/ monthly ? 'mo' : 'yr'`}</Price>
       {!monthly ? <ExtraInfo>2 month free</ExtraInfo> : null}

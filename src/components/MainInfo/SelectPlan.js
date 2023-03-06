@@ -1,7 +1,13 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { formActions }  from "../../store";
 import "../../variables.css";
 import styled from "styled-components";
+import { ReactComponent as IconArcade } from "../../assets/images/icon-arcade.svg";
+import { ReactComponent as IconAdvanced } from "../../assets/images/icon-advanced.svg";
+import { ReactComponent as IconPro } from "../../assets/images/icon-pro.svg";
 import PlanCard from "./PlanCard";
+import Switch from "./Switch";
 
 const Container = styled.div`
 	display: flex;
@@ -14,59 +20,76 @@ const Title = styled.p`
 	font-weight: var(--font-weight-700);
 `;
 
+const Plans = styled.div`
+	display: flex;
+`;
+
 const UnderTitle = styled.p`
 	color: var(--cool-gray);
 `;
 
 const SelectPlan = ({ handleFormData, formData, showError }) => {
 
-  const [activePlanCard, setActivePlanCard] = useState(1);
+	const activePlan = useSelector((state) => state.activePlan)
+	console.log(activePlan)
+  const [activePlanCard, setActivePlanCard] = useState(activePlan);
   const [monthly, setMonthly] = useState(true)
 
-  const handlePlanClick = (num)=> {
-    setActivePlanCard(num)
-  }
+  // const handlePlanClick = (num)=> {
+  //   setActivePlanCard(num)
+  // }
 	
+
+	const dispatch = useDispatch();
+
+	const handleSelectPlan = (choice) => {
+		dispatch(formActions.setPlan(choice));
+	}
+
 	const plans = [
 		{
 			title: "Arcade",
 			priceMonthly: 9,
 			priceYearly: 90,
-			icon: "../../assets/images/icon-arcade.svg",
-			number: 1,
+			Image: IconArcade,
+			choice: 1,
 		},
 		{
 			title: "Advanced",
 			priceMonthly: 12,
 			priceYearly: 120,
-			icon: "../../assets/images/icon-advanced.svg",
-			number: 2,
+			Image: IconAdvanced,
+			choice: 2,
 		},
 		{
 			title: "Pro",
 			priceMonthly: 15,
 			priceYearly: 150,
-			icon: "../../assets/images/icon-pro.svg",
-			number: 3,
+			Image: IconPro,
+			choice: 3,
 		},
 	];
 	return (
 		<Container>
 			<Title>Select your plan</Title>
 			<UnderTitle>You have the option of monthly or yearly billing.</UnderTitle>
-			{plans.map(({title, priceMonthly, priceYearly, icon, number})=> {
-        return (
-					<PlanCard
-						key={title}
-						title={title}
-						price={monthly ? priceMonthly : priceYearly}
-						icon={icon}
-						monthly={monthly}
-						activePlanCard={activePlanCard}
-						onClick={() => handlePlanClick(number)}
-					/>
-				);
-      })}
+			<Plans>
+				{plans.map(({title, priceMonthly, priceYearly, Image, choice})=> {
+					return (
+						<PlanCard
+							key={title}
+							title={title}
+							price={monthly ? priceMonthly : priceYearly}
+							Image={Image}
+							monthly={monthly}
+							choice={choice}
+							activePlan={activePlan===choice}
+							handleSelectPlan={handleSelectPlan}
+						/>
+					);
+				})}
+			</Plans>
+			<Switch />
 		</Container>
 	);
 };

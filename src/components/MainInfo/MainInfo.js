@@ -1,4 +1,5 @@
 import PersonalInfo from "./PersonalInfo";
+import SelectPlan from "./SelectPlan";
 import "../../variables.css";
 import styled from "styled-components";
 
@@ -15,11 +16,13 @@ const MainInfo = ({
 }) => {
 	return (
 		<InfoMain>
+		{activeStep === 1 ? (
 			<PersonalInfo
 				handleFormData={handleFormData}
 				formData={formData}
 				showError={showError}
-			/>
+			/>) : 
+			(<SelectPlan/>)}
 			{children}
 		</InfoMain>
 	);

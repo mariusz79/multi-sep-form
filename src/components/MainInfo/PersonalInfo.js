@@ -55,8 +55,7 @@ const PersonalInfo = ({ handleFormData, formData, showError }) => {
 	const handleChange = (e) => {
 		handleFormData(e.target.name, e.target.value);
 	};
-  console.log(formData);
-console.log(showError)
+
 	return (
 		<Container>
 			<Title>Personal info</Title>
