@@ -11,16 +11,17 @@ const Container = styled.div`
 `;
 
 const Title = styled.p`
-	color: var(--marine-blue);
+  color: ${(props) =>
+		props.color ? "var(--marine-blue)" : "var(--light-gray)"};
 	font-size: var(--font-size-32);
 	font-weight: var(--font-weight-700);
 `;
 
 const CheckBoxWrapper = styled.div`
 	position: relative;
-	
 	display: flex;
 `;
+
 const CheckBoxLabel = styled.label`
 	position: absolute;
 	top: 0;
@@ -28,7 +29,7 @@ const CheckBoxLabel = styled.label`
 	width: 42px;
 	height: 26px;
 	border-radius: 15px;
-	background: #bebebe;
+	background: var(--marine-blue);
 	cursor: pointer;
 	&::after {
 		content: "";
@@ -73,12 +74,12 @@ const Switch = ({ handleFormData, formData, showError }) => {
 
 	return (
 		<Container>
-		<Title>Monthly</Title>
+		<Title color={!yearly}>Monthly</Title>
 			<CheckBoxWrapper>
 				<CheckBox id="checkbox" type="checkbox" checked={yearly} onChange={handleCheckboxClick} />
 				<CheckBoxLabel htmlFor="checkbox" />
 			</CheckBoxWrapper>
-			<Title>Yearly</Title>
+			<Title color={yearly}>Yearly</Title>
 		</Container>
 	);
 };

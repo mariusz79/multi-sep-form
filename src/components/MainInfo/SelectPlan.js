@@ -31,14 +31,7 @@ const UnderTitle = styled.p`
 const SelectPlan = ({ handleFormData, formData, showError }) => {
 
 	const activePlan = useSelector((state) => state.activePlan)
-	console.log(activePlan)
-  const [activePlanCard, setActivePlanCard] = useState(activePlan);
-  const [monthly, setMonthly] = useState(true)
-
-  // const handlePlanClick = (num)=> {
-  //   setActivePlanCard(num)
-  // }
-	
+	const yearly = useSelector((state) => state.yearly)
 
 	const dispatch = useDispatch();
 
@@ -79,9 +72,9 @@ const SelectPlan = ({ handleFormData, formData, showError }) => {
 						<PlanCard
 							key={title}
 							title={title}
-							price={monthly ? priceMonthly : priceYearly}
+							price={!yearly ? priceMonthly : priceYearly}
 							Image={Image}
-							monthly={monthly}
+							yearly={yearly}
 							choice={choice}
 							activePlan={activePlan===choice}
 							handleSelectPlan={handleSelectPlan}

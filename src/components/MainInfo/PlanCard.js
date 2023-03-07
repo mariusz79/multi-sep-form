@@ -4,6 +4,7 @@ import styled from "styled-components";
 const Card = styled.div`
 	display: flex;
 	flex-direction: column;
+	cursor: pointer;
 	border: 1px solid;
 	border-color: ${(props) =>
 		props.activePlanCard ? "var(--purplish-blue)" : "var(--light-gray)"};
@@ -35,17 +36,14 @@ const ExtraInfo = styled.p`
 	color: var(--cool-gray);
 `;
 
-const PlanCard = ({ title, price, Image, choice, monthly, activePlan, handleSelectPlan  }) => {
-console.log(choice)
-	
-	
+const PlanCard = ({ title, price, Image, choice, yearly, activePlan, handleSelectPlan  }) => {
+		
 	return (
 		<Card activePlanCard={activePlan} onClick={()=>{handleSelectPlan(choice)}}>
-		<p>{choice}</p>
       <Image />
 			<Title>{title}</Title>
-			<Price>{`$${price}/ monthly ? 'mo' : 'yr'`}</Price>
-      {!monthly ? <ExtraInfo>2 month free</ExtraInfo> : null}
+			<Price>{`$${price}/`} {yearly ? 'yr' : 'mo'}</Price>
+      {yearly ? <ExtraInfo>2 month free</ExtraInfo> : null}
 		</Card>
 	);
 };
