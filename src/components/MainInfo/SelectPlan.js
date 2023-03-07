@@ -31,6 +31,7 @@ const UnderTitle = styled.p`
 const SelectPlan = ({ handleFormData, formData, showError }) => {
 
 	const activePlan = useSelector((state) => state.activePlan)
+	const plansData = useSelector((state) => state.plansData)
 	const yearly = useSelector((state) => state.yearly)
 
 	const dispatch = useDispatch();
@@ -39,41 +40,18 @@ const SelectPlan = ({ handleFormData, formData, showError }) => {
 		dispatch(formActions.setPlan(choice));
 	}
 
-	const plans = [
-		{
-			title: "Arcade",
-			priceMonthly: 9,
-			priceYearly: 90,
-			Image: IconArcade,
-			choice: 1,
-		},
-		{
-			title: "Advanced",
-			priceMonthly: 12,
-			priceYearly: 120,
-			Image: IconAdvanced,
-			choice: 2,
-		},
-		{
-			title: "Pro",
-			priceMonthly: 15,
-			priceYearly: 150,
-			Image: IconPro,
-			choice: 3,
-		},
-	];
 	return (
 		<Container>
 			<Title>Select your plan</Title>
 			<UnderTitle>You have the option of monthly or yearly billing.</UnderTitle>
 			<Plans>
-				{plans.map(({title, priceMonthly, priceYearly, Image, choice})=> {
+				{plansData.map(({title, priceMonthly, priceYearly, Image, choice})=> {
 					return (
 						<PlanCard
 							key={title}
 							title={title}
 							price={!yearly ? priceMonthly : priceYearly}
-							Image={Image}
+							Image={choice === 1 ? IconArcade: choice=== 2 ? IconAdvanced: IconPro}
 							yearly={yearly}
 							choice={choice}
 							activePlan={activePlan===choice}

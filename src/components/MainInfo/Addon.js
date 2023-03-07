@@ -47,29 +47,6 @@ const CheckboxInput  = styled.input`
   }
 `;
 
-// const CheckBoxLabel = styled.label`
-// 	position: absolute;
-// 	top: 0;
-// 	left: 0;
-// 	width: 42px;
-// 	height: 26px;
-// 	border-radius: 15px;
-// 	cursor: pointer;
-// 	&::after {
-// 		content: "";
-// 		display: block;
-// 		border-radius: 50%;
-// 		border: 1px solid;
-// 		width: 18px;
-// 		height: 18px;
-// 		margin: 3px;
-// 		background: #ffffff;
-// 		/* transition: 0.2s; */
-// 	}
-// `;
-
-
-
 const TitleWrapper = styled.div`
 `;
 
@@ -89,15 +66,10 @@ const Price = styled.p`
 	color: var(--cool-gray);
 `;
 
-const ExtraInfo = styled.p`
-	color: var(--cool-gray);
-`;
-
 const Addon = ({ title, underTitle, price, yearly, choice, activeAddon, handleSelectAddons}) => {
 	
 	return (
 		<Card activeAddon={activeAddon} onClick={()=>{handleSelectAddons(choice)}}>
-		<p>{choice}</p>
       <CheckBoxWrapper>
 				<CheckboxInput  id="checkbox" type="checkbox" checked={activeAddon} />
 				<CheckboxDisplay />

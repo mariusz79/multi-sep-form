@@ -23,33 +23,10 @@ const UnderTitle = styled.p`
 	color: var(--cool-gray);
 `;
 
-const addonsData = [
-		{
-			title: "Online service",
-			underTitle: "Access to multiplayer games",
-			priceYearly: 10,
-			priceMonthly: 1,
-			choice: 1,
-		},
-		{
-			title: "Larger storage",
-			underTitle: "Extra 1TB of cloud save",
-			priceYearly: 20,
-			priceMonthly: 2,
-			choice: 2,
-		},
-		{
-			title: "Customizable Profile",
-			underTitle: "Custom theme on your profile",
-			priceYearly: 20,
-			priceMonthly: 2,
-			choice: 3,
-		},
-	];
-
 const Addons = () => {
   const addons = useSelector((state) => state.addons)
-  console.log(addons)
+  const addonsData = useSelector((state) => state.addonsData)
+  
   const yearly = useSelector((state) => state.yearly)
 
 	const dispatch = useDispatch();

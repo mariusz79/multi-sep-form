@@ -3,6 +3,7 @@ import SelectPlan from "./SelectPlan";
 import "../../variables.css";
 import styled from "styled-components";
 import Addons from "./Addons";
+import Summary from "./Summary";
 
 const InfoMain = styled.div`
 	flex: 2;
@@ -23,9 +24,9 @@ const MainInfo = ({
 				formData={formData}
 				showError={showError}
 			/>) : activeStep === 2 ?
-			(<SelectPlan/>) : (
+			(<SelectPlan/>) : activeStep === 3 ?(
 				<Addons />
-			)}
+			) : (<Summary />)}
 			{children}
 		</InfoMain>
 	);

@@ -41,7 +41,7 @@ const ActionButtons = ({ onGoBackClick, onGoForwardClick, activeStep }) => {
 	return (
 		<ButtonsContainer activeStep={activeStep}>
 			{activeStep !== 1 ? <BackButton onClick={onGoBackClick}>Go Back</BackButton> : null}
-			<ForwardButton onClick={onGoForwardClick}>Next Step</ForwardButton>
+			<ForwardButton onClick={onGoForwardClick}>{activeStep===4? 'Confirm' : 'Next Step'}</ForwardButton>
 		</ButtonsContainer>
 	);
 };
